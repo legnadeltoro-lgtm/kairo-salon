@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tienda — Kairo Salon</title>
+<meta name="description" content="Productos capilares profesionales sin formol. Shampoós, keratiners, mascarillas y más para tu rutina en casa."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<!-- HEADER -->
+<header class="header" id="siteHeader">
+  <div class="container header__inner">
+    <a href="index.html" class="logo">
+      <img src="img/cabello-recuperado.jpg" alt="Kairo Salon" loading="lazy" decoding="async"/>
+      Kairo Salon
+    </a>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-controls="nav" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav" aria-label="Navegación principal">
+      <a href="index.html#servicios" data-nav>Servicios</a>
+      <a href="tienda.html" class="active" data-nav>Tienda</a>
+      <a href="reserva.html" data-nav>Reserva</a>
+      <a href="index.html#nosotros" data-nav>Nosotros</a>
+      <a href="#carrito" data-nav class="nav__cart">
+        Carrito <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <div data-anim>
+      <span class="section__label" style="text-align:left;display:block;margin-bottom:.5rem">Productos</span>
+      <h1>Nuestra tienda</h1>
+      <p>Productos capilares profesionales para mantener tu cabello en su mejor estado entre visitas al salón.</p>
+      <nav aria-label="Breadcrumb" style="margin-top:1rem;font-size:.82rem;color:rgba(255,255,255,.45);display:flex;gap:.5rem;align-items:center">
+        <a href="index.html" style="color:rgba(255,255,255,.55)">Inicio</a>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;opacity:.4"><path d="M9 18l6-6-6-6"/></svg>
+        <span style="color:var(--a3)">Tienda</span>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- TIENDA -->
+<section class="section">
+  <div class="container">
+
+    <!-- Spotlight grande -->
+    <div id="productSpotlight" class="spotlight" aria-live="polite"></div>
+
+    <!-- Filtros -->
+    <div class="filters" data-anim>
+      <label class="field">
+        <span>Tipo de cabello</span>
+        <input list="dl-hair" id="fHair" placeholder="Todos"/>
+        <datalist id="dl-hair"></datalist>
+      </label>
+      <label class="field">
+        <span>Ingrediente</span>
+        <input list="dl-ing" id="fIng" placeholder="Todos"/>
+        <datalist id="dl-ing"></datalist>
+      </label>
+      <label class="field">
+        <span>Tipo de producto</span>
+        <input list="dl-type" id="fType" placeholder="Todos"/>
+        <datalist id="dl-type"></datalist>
+      </label>
+      <button class="btn btn--ghost btn--sm" id="clearFilters">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Limpiar
+      </button>
+    </div>
+
+    <!-- Grid productos -->
+    <div class="grid--products" id="productsGrid"></div>
+    <div class="section__actions">
+      <button class="btn btn--primary" id="loadMoreProducts">Ver más productos</button>
+    </div>
+  </div>
+</section>
+
+<!-- CARRITO -->
+<section id="carrito" class="section section--alt">
+  <div class="container">
+    <span class="section__label" data-anim>Compras</span>
+    <h2 class="section__title" data-anim>Tu carrito</h2>
+    <div id="cartList" class="cart"></div>
+    <div class="cart__footer" id="cartFooter" hidden>
+      <div class="cart__total">Total: <strong id="cartTotal">$0</strong></div>
+      <button class="btn btn--gold" id="checkoutBtn">Finalizar compra</button>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer-brand">
+      <h3>
+        <img src="img/cabello-recuperado.jpg" alt="" loading="lazy" decoding="async"/>
+        Kairo Salon
+      </h3>
+      <p>Alisados sin formol &amp; recuperación capilar.<br>La Habana, Cuba.</p>
+    </div>
+    <div>
+      <h4>Páginas</h4>
+      <a href="index.html">Inicio</a>
+      <a href="tienda.html">Tienda</a>
+      <a href="reserva.html">Reservar</a>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <a href="https://wa.me/5363190976" target="_blank" rel="noopener">WhatsApp: +53 6319 0976</a>
+      <a href="mailto:legnadeltoro@gmail.com">legnadeltoro@gmail.com</a>
+      <p class="footer-copy" style="margin-top:1rem">© <span id="year"></span> Legna del Toro</p>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL CHECKOUT -->
+<div class="modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="coTitle" hidden>
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__card" tabindex="-1">
+    <div class="modal__header">
+      <h3 id="coTitle">Finalizar compra</h3>
+      <button class="modal__close" data-close aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <p>¿Deseas domicilio?</p>
+      <div class="radios">
+        <label><input type="radio" name="domicilio" value="Si" checked/> Sí, quiero domicilio</label>
+        <label><input type="radio" name="domicilio" value="No"/> No, recojo en el salón</label>
+      </div>
+      <div id="domBox" class="conditional" style="margin-top:1rem">
+        <label class="field">
+          <span>Municipio</span>
+          <input list="dl-municipios-modal" id="municipio" placeholder="Escribe tu municipio..." autocomplete="off"/>
+          <datalist id="dl-municipios-modal"></datalist>
+        </label>
+        <label class="field">
+          <span>Dirección exacta</span>
+          <input type="text" id="direccion" placeholder="Calle, número, entre..."/>
+        </label>
+        <label class="field">
+          <span>Punto de referencia</span>
+          <input type="text" id="referencia" placeholder="Cerca de..."/>
+        </label>
+        <label class="field">
+          <span>Descripción breve</span>
+          <textarea id="descDom" rows="2" placeholder="Color de la casa, piso, etc."></textarea>
+        </label>
+      </div>
+      <div class="totals" style="margin-top:1.25rem">
+        <div class="totals__row">Subtotal: <strong id="coSubtotal">$0</strong></div>
+        <div class="totals__row" id="coShippingRow">Domicilio: <strong id="coShipping">$0</strong></div>
+        <div class="totals__big">Total: <strong id="coTotal">$0</strong></div>
+      </div>
+      <button class="btn btn--gold btn--block" id="sendOrder" style="margin-top:1.25rem">Enviar pedido por WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
