@@ -186,7 +186,7 @@ p{margin:0 0 .9em;color:var(--soft);font-weight:300}
 .spotlight__meta{font-size:.82rem;color:var(--muted);margin:.5rem 0 .5rem}
 .spotlight__price{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--a1);margin-bottom:1.5rem}
 
-/* Product cards */
+
 /* Product cards */
 .grid--products{display:grid;gap:1.5rem;grid-template-columns:repeat(2,1fr)}
 .prod-card{background:var(--surface);border-radius:var(--r2);overflow:hidden;border:1px solid var(--border);box-shadow:var(--sh-sm);transition:transform .3s var(--ease),box-shadow .3s;display:flex;flex-direction:column}
@@ -226,6 +226,18 @@ p{margin:0 0 .9em;color:var(--soft);font-weight:300}
 .action-buttons{width:100%;justify-content:center}
 .prod-card__footer .btn--primary{white-space:normal;padding:.6rem}
 }
+
+/* Filters - versión más bonita */
+.filters{display:grid;gap:1rem;background:var(--surface);padding:1.8rem;border-radius:28px;border:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,.04);margin-bottom:2.5rem}
+.field{display:flex;flex-direction:column;gap:.5rem}
+.field>span{font-weight:600;color:var(--g1);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+.field input,.field select{width:100%;padding:.8rem 1.2rem;border:1.5px solid var(--border);border-radius:40px;font:inherit;background:var(--bg);color:var(--text);font-size:.85rem;transition:all .2s;outline:none}
+.field input:hover,.field select:hover{border-color:var(--a2)}
+.field input:focus,.field select:focus{border-color:var(--a1);box-shadow:0 0 0 4px rgba(201,168,76,.12);background:var(--surface)}
+#clearFilters{background:var(--g6);border:1.5px solid var(--border);color:var(--g1);padding:.8rem 1rem;border-radius:40px;font-size:.73rem;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:1.6rem;text-transform:uppercase;letter-spacing:.06em}
+#clearFilters:hover{background:var(--g1);border-color:var(--g1);color:#fff;transform:translateY(-2px);box-shadow:var(--sh-sm)}
+#clearFilters svg{width:14px;height:14px;transition:transform .2s}
+#clearFilters:hover svg{transform:rotate(90deg);stroke:#fff}
 /* ════════════ NOSOTROS ════════════ */
 .about-grid{display:grid;gap:3rem}
 .about-label{display:block;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--a1);margin-bottom:.5rem}
