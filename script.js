@@ -355,14 +355,20 @@ function renderProducts() {
         <div class="prod-card__ing">${escapeHTML(p.ingrediente)} · ${escapeHTML(p.tipoCabello)}</div>
         <div class="prod-card__highlight">${escapeHTML(p.highlight)}</div>
         <div class="prod-card__footer">
-          <span class="prod-card__price">${money(p.precio)}</span>
-          <div style="display:flex;gap:.5rem;align-items:center">
+          <div class="price-qty-wrapper">
+            <span class="prod-card__price">${money(p.precio)}</span>
+            ${inCart ? `
+            <div class="product__qty">
+              <button data-dec="${p.id}">−</button>
+              <span id="qty-${p.id}">${inCart.qty}</span>
+              <button data-inc="${p.id}">+</button>
+            </div>` : ''}
+          </div>
+          <div class="action-buttons">
             <button class="btn btn--ghost btn--sm" data-feature="${p.id}" title="Ver destacado" aria-label="Ver producto destacado">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </button>
-            ${inCart
-              ? `<div class="product__qty"><button data-dec="${p.id}">−</button><span>${inCart.qty}</span><button data-inc="${p.id}">+</button></div>`
-              : `<button class="btn btn--primary btn--sm" data-add="${p.id}">Añadir</button>`}
+            <button class="btn btn--primary btn--sm" data-add="${p.id}">${inCart ? 'Añadir otro' : 'Añadir'}</button>
           </div>
         </div>
       </div>
@@ -378,7 +384,6 @@ function renderProducts() {
   }));
   updateLoadMore(filtered.length);
 }
-
 function renderSpotlight(pid = spotlightProductId) {
   const t = $("#productSpotlight"); if (!t) return;
   const p = productos.find(x => x.id === pid) || productos[0];
