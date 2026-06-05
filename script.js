@@ -44,10 +44,8 @@ const productos = [
 ];
 
 const municipios = ["Plaza de la Revolución","Centro Habana","Habana Vieja","Cerro","10 de Octubre","Playa","Marianao","La Lisa","Boyeros","Arroyo Naranjo","Cotorro","Guanabacoa","Regla","San Miguel del Padrón","Habana del Este"];
-// Shipping prices per group of 4 municipios. Group 0 => first 4, group 1 => next 4, etc.
-// Edit these values to change pricing per group.
 const SHIPPING_PRICES = [10, 15, 20, 25];
-const PRECIO_DOMICILIO = 15; // fallback
+const PRECIO_DOMICILIO = 15;
 
 function getShippingPrice(municipio) {
   if (!municipio) return PRECIO_DOMICILIO;
@@ -200,7 +198,6 @@ function updateCheckoutTotals() {
   const dom = checked ? checked.value === "Si" : true;
   const domBox = $("#domBox");
 
-  /* Mostrar/ocultar formulario de domicilio */
   if (domBox) {
     domBox.hidden = !dom;
     $$('input, select, textarea', domBox).forEach(f => {
@@ -214,7 +211,6 @@ function updateCheckoutTotals() {
   const municipioVal = ($("#municipio")||{value:""}).value || "";
   const ship = dom ? getShippingPrice(municipioVal) : 0;
 
-  /* ocultar/limpiar fila de domicilio cuando no aplica */
   const shipRow = $("#coShippingRow");
   const shipVal = $("#coShipping");
   if (shipRow) { shipRow.hidden = !dom; shipRow.style.display = dom ? "" : "none"; }
@@ -302,7 +298,6 @@ function renderServicios() {
     pendingService = b.dataset.book;
     openModal("#serviceModal");
   }));
-  // re-observe new elements
   $$("[data-anim]:not(.visible)", grid).forEach(el => animObs.observe(el));
 }
 
@@ -350,7 +345,6 @@ function renderProducts() {
   }
   grid.innerHTML = list.map(p => {
     const inCart = cart.find(c => c.id === p.id);
-    const qty = inCart ? inCart.qty : 1;
     return `<div class="prod-card">
       <div class="prod-card__img-wrap">
         <img class="prod-card__img" src="${PROD_IMGS[p.id]}" alt="${escapeHTML(p.nombre)}" loading="lazy" decoding="async"/>
@@ -361,20 +355,13 @@ function renderProducts() {
         <div class="prod-card__ing">${escapeHTML(p.ingrediente)} · ${escapeHTML(p.tipoCabello)}</div>
         <div class="prod-card__highlight">${escapeHTML(p.highlight)}</div>
         <div class="prod-card__footer">
-          <div class="price-qty-wrapper">
-            <span class="prod-card__price">${money(p.precio)}</span>
-            <div class="product__qty">
-              <button data-dec="${p.id}">−</button>
-              <span id="qty-${p.id}">${qty}</span>
-              <button data-inc="${p.id}">+</button>
-            </div>
-          </div>
+          <span class="prod-card__price">${money(p.precio)}</span>
           <div style="display:flex;gap:.5rem;align-items:center">
             <button class="btn btn--ghost btn--sm" data-feature="${p.id}" title="Ver destacado" aria-label="Ver producto destacado">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             </button>
             ${inCart
-              ? `<button class="btn btn--primary btn--sm" data-add="${p.id}">Añadir otro</button>`
+              ? `<div class="product__qty"><button data-dec="${p.id}">−</button><span>${inCart.qty}</span><button data-inc="${p.id}">+</button></div>`
               : `<button class="btn btn--primary btn--sm" data-add="${p.id}">Añadir</button>`}
           </div>
         </div>
@@ -391,6 +378,7 @@ function renderProducts() {
   }));
   updateLoadMore(filtered.length);
 }
+
 function renderSpotlight(pid = spotlightProductId) {
   const t = $("#productSpotlight"); if (!t) return;
   const p = productos.find(x => x.id === pid) || productos[0];
@@ -517,5 +505,5 @@ function enviarReserva(d, r) {
     renderSpotlight();
     renderProducts();
   }
-  renderCart(); // carrito disponible en index y tienda
+  renderCart();
 })();
