@@ -251,6 +251,53 @@ legend::before{content:'';display:block;width:4px;height:18px;background:linear-
 .progress__bar{height:100%;width:0%;background:linear-gradient(90deg,var(--a1),var(--a3),var(--g3));transition:width .15s linear;border-radius:999px}
 .recommendation{margin-top:1.5rem;padding:1.25rem 1.5rem;background:linear-gradient(135deg,var(--a6),var(--g6));border-radius:12px;border-left:4px solid var(--a1);animation:fadeUp .5s var(--ease) both}
 .recommendation h4{font-family:'Cormorant Garamond',serif;color:var(--g1);font-size:1.3rem;margin-bottom:.5rem}
+/* ========== TEXTAREA - Estilo bonito y sin redimensión ========== */
+textarea {
+  width: 100%;
+  resize: none; 
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  padding: 0.9rem 1.2rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text);
+  transition: all 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
+}
+
+/* Efecto al hacer foco (click) */
+textarea:focus {
+  outline: none;
+  border-color: var(--a1);
+  box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.12), inset 0 1px 2px rgba(0,0,0,0.02);
+  background: var(--surface);
+}
+
+/* Efecto al pasar el mouse */
+textarea:hover {
+  border-color: var(--a2);
+}
+
+/* Placeholder más suave */
+textarea::placeholder {
+  color: var(--muted);
+  font-weight: 300;
+  opacity: 0.7;
+}
+
+/* Estilo específico para el textarea del formulario de reserva */
+.form-card textarea {
+  min-height: 100px;
+  margin-top: 0.25rem;
+}
+
+/* Para el textarea con auto-crecimiento (si usas data-autogrow) */
+textarea[data-autogrow] {
+  overflow-y: hidden;
+  transition: height 0.1s ease;
+}
 
 /* ════════════ CARRITO ════════════ */
 .cart{display:flex;flex-direction:column;gap:.85rem}
